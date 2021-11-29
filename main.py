@@ -6,6 +6,19 @@ from ibm_watson import AssistantV2
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from config import API_KEY, ASSISTANT_ID, BASE_URL, IMAGE_CHANNEL, PREFIX, TOKEN, GOOGLE_API, CHANNEL_ID
 
+
+def watson_response_parse(response_initial):
+    response = ''
+    if 'text' in response_initial['output']['generic'][0]:
+        response += response_initial['output']['generic'][0]['text']
+    if 'title' in response_initial['output']['generic'][0]:
+        response += response_initial['output']['generic'][0]['title']
+    if 'source' in response_initial['output']['generic'][0]:
+        response += ' ' + response_initial['output']['generic'][0]['source']
+    print(type(response))
+    return response
+
+
 def send_message(assistant, session_id, assistant_id, message):
     response = assistant.message(
         assistant_id=assistant_id,
@@ -15,8 +28,13 @@ def send_message(assistant, session_id, assistant_id, message):
             'text': message
         }
     ).get_result()
+    """cos tu nie dziala
+    responseMessage = response['output']['generic'][0]['text'] if 'text' in response['output']['generic'][0] \
+        else response['output']['generic'][0]
+        #else response['output']['generic'][0]['title'] if 'title' in response['output']['generic'][0] \
 
-    return response['output']['generic'][0]['text'] if 'text' in response['output']['generic'][0] else ''
+    # responseMessage += response['output']['generic'][0]['text']"""
+    return watson_response_parse(response)
 
 def connectBot():
     cogs = [music]
@@ -62,3 +80,4 @@ async def msg(message):
         await message.channel.send('Shutting down..')
 
 Client.run(TOKEN)
+

@@ -24,6 +24,7 @@ class music(commands.Cog):
     @commands.command()
     async def play(self, ctx, url):
         '''ctx.voice_client.stop()'''
+        await ctx.send("Playing:" + url)
         FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
                           'options': '-vn'}
         YDL_OPTIONS = {'format': "bestaudio"}
@@ -43,6 +44,7 @@ class music(commands.Cog):
     async def resume(self, ctx):
         await ctx.voice_client.resume()
         await ctx.send("Resumed")
+
 
 
 def setup(client):
