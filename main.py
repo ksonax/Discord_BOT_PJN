@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import music
 import tictactoe
+from tictactoe import client
 from ibm_watson import AssistantV2
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from config import API_KEY, ASSISTANT_ID, BASE_URL, IMAGE_CHANNEL, PREFIX, TOKEN, GOOGLE_API, CHANNEL_ID
@@ -29,12 +30,6 @@ def send_message(assistant, session_id, assistant_id, message):
             'text': message
         }
     ).get_result()
-    """cos tu nie dziala
-    responseMessage = response['output']['generic'][0]['text'] if 'text' in response['output']['generic'][0] \
-        else response['output']['generic'][0]
-        #else response['output']['generic'][0]['title'] if 'title' in response['output']['generic'][0] \
-
-    # responseMessage += response['output']['generic'][0]['text']"""
     return watson_response_parse(response)
 
 def connectBot():
@@ -61,18 +56,17 @@ session_json = json.dumps(session, indent=2)
 session_dict = json.loads(session_json)
 session_id = session_dict['session_id']
 
-Client = commands.Bot(command_prefix=PREFIX)
 
 cogs = [music]
 
 for i in range(len(cogs)):
-    cogs[i].setup(Client)
+    cogs[i].setup(client)
 
-@Client.listen('on_message')
+@client.listen('on_message')
 async def msg(message):
     if message.content.startswith(PREFIX):
         return
-    if message.author == Client.user:
+    if message.author == client.user:
         return
     if message.content != 'exit':
         await message.channel.send(send_message(assistant, session_id, ASSISTANT_ID, message.content))
@@ -80,5 +74,5 @@ async def msg(message):
         assistant.delete_session(ASSISTANT_ID, session_id).get_result()
         await message.channel.send('Shutting down..')
 
-Client.run(TOKEN)
+client.run(TOKEN)
 
