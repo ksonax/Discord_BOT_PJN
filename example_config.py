@@ -1,6 +1,6 @@
 PREFIX = '!'
 GOOGLE_API = ''
-CHANNEL_ID = ''
+TOKEN = ''
 API_KEY = ''
 BASE_URL = ''
 ASSISTANT_ID = ''
