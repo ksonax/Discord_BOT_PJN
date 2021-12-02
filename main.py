@@ -2,6 +2,7 @@ import json
 import discord
 from discord.ext import commands
 import music
+import tictactoe
 from ibm_watson import AssistantV2
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from config import API_KEY, ASSISTANT_ID, BASE_URL, IMAGE_CHANNEL, PREFIX, TOKEN, GOOGLE_API, CHANNEL_ID
