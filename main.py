@@ -75,4 +75,3 @@ async def msg(message):
         await message.channel.send('Shutting down..')
 
 client.run(TOKEN)
-

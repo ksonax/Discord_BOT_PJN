@@ -132,4 +132,3 @@ async def place_error(ctx, error):
         await ctx.send("Please enter a position you would like to mark.")
     elif isinstance(error, commands.BadArgument):
         await ctx.sent("Please make sure to enter number/integer")
-
