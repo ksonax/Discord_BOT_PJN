@@ -1,5 +1,4 @@
 PREFIX = '!'
-IMAGE_CHANNEL = ''
 GOOGLE_API = ''
 CHANNEL_ID = ''
 API_KEY = ''
