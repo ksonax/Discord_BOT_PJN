@@ -15,12 +15,15 @@ class music(commands.Cog):
         voice_channel = ctx.author.voice.channel
         if ctx.voice_client is None:
             await voice_channel.connect()
+            await ctx.send("Joined voice channel!")
         else:
             await ctx.voice_client.move_to(voice_channel)
+            await ctx.send("Voice channel changed!")
 
     @commands.command()
     async def disconnect(self, ctx):
         await ctx.voice_client.disconnect()
+        await ctx.send("Disconnected from voice channel!")
 
     @commands.command()
     async def play(self, ctx, url):
