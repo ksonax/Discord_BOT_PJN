@@ -42,13 +42,13 @@ class music(commands.Cog):
 
     @commands.command()
     async def pause(self, ctx):
-        await ctx.voice_client.pause()
         await ctx.send("Paused")
+        await ctx.voice_client.pause()
 
     @commands.command()
     async def resume(self, ctx):
-        await ctx.voice_client.resume()
         await ctx.send("Resumed")
+        await ctx.voice_client.resume()
 
     @commands.command()
     async def coinflip(self, ctx):
