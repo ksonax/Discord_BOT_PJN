@@ -1,4 +1,5 @@
 import discord
+import random
 from discord.ext import commands
 import youtube_dl
 
@@ -44,6 +45,14 @@ class music(commands.Cog):
     async def resume(self, ctx):
         await ctx.voice_client.resume()
         await ctx.send("Resumed")
+
+    @commands.command()
+    async def coinflip(self, ctx):
+        flip = random.randint(0, 1)
+        if flip == 0:
+            await ctx.send("Heads")
+        else:
+            await ctx.send("Tails")
 
 
 
